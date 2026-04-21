@@ -71,12 +71,14 @@
     /* ── Utility ────────────────────────────────────────── */
     .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
     .section-label {
+      display: block;
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-accent);
+      margin-bottom: 12px;
     }
     .reveal {
       opacity: 0;
@@ -249,8 +251,11 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 120px 24px 160px;
       max-width: 900px;
+    }
+    @media (max-width: 767px) {
+      .hero-content { padding: 120px 20px 180px; }
     }
     .hero-badge {
       display: inline-flex;
@@ -450,6 +455,8 @@
     }
     .story-images {
       position: relative;
+      padding: 40px 40px 40px 40px;
+      margin: -40px -40px -40px -40px;
     }
     .story-img-main {
       width: 100%;
@@ -502,7 +509,7 @@
       font-weight: 500;
       line-height: 1.15;
       color: var(--color-primary);
-      margin: 16px 0 28px;
+      margin: 0 0 28px;
     }
     .story-text p {
       font-size: 17px;
@@ -546,7 +553,7 @@
       font-weight: 500;
       line-height: 1.15;
       color: var(--color-primary);
-      margin: 16px 0 20px;
+      margin: 0 0 20px;
     }
     .section-header p {
       font-size: 17px;
@@ -922,9 +929,8 @@
       color: #fff;
       font-size: 24px;
       opacity: 0;
-      transition: opacity 0.35s;
       transform: scale(0.8);
-      transition: all 0.35s;
+      transition: opacity 0.35s, transform 0.35s;
     }
     .gallery-item:hover .gallery-item-overlay i { opacity: 1; transform: scale(1); }
 
@@ -1454,7 +1460,7 @@
         <article class="flavor-card flavor-card-featured reveal reveal-delay-2">
           <img
             class="flavor-card-img"
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=85&auto=format&fit=crop&sat=-20"
+            src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&q=85&auto=format&fit=crop"
             alt="Gusti ispirazione Kinder"
             width="600" height="240"
             loading="lazy"
@@ -1795,7 +1801,7 @@
         </div>
         <div class="visit-map reveal reveal-delay-2">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5969.27!2d12.78!3d41.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f63!2sGelateria%20Venice%20Tivoli%20Terme!5e0!3m2!1sit!2sit!4v1"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11938.63!2d12.7782!3d41.9744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6357a2ef6cad%3A0x7e3b31f5b7c4af3a!2sTivoli+Terme%2C+RM!5e0!3m2!1sit!2sit!4v1714000000000"
             title="Mappa Gelateria Venice, Tivoli Terme"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -1873,7 +1879,7 @@
   </div>
 
   <!-- ── Cookie Banner ─────────────────────────────────────── -->
-  <div class="cookie-banner" id="cookieBanner" role="alertdialog" aria-live="polite" aria-label="Cookie">
+  <div class="cookie-banner hidden" id="cookieBanner" role="alertdialog" aria-live="polite" aria-label="Cookie">
     <p class="cookie-text">
       Utilizziamo cookie per migliorare la tua esperienza. Continuando, accetti la nostra
       <a href="#" style="color:var(--color-gold);">cookie policy</a>.
@@ -1981,6 +1987,17 @@
       };
       requestAnimationFrame(update);
     };
+
+    // Animate hero stat numbers on load
+    window.addEventListener('load', () => {
+      const stats = document.querySelectorAll('.hero-stat-value');
+      setTimeout(() => {
+        // stat[0] = 4.7 Google, stat[1] = 4.9 Facebook
+        if (stats[0]) animateValue(stats[0], 0, 4.7, 1, 1200);
+        if (stats[1]) animateValue(stats[1], 0, 4.9, 1, 1200);
+        // stat[2] is "#1" text — leave as-is
+      }, 800);
+    });
   </script>
 </body>
 </html>
