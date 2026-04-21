@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gelateria Venice – Gelato artigianale d'eccellenza a Tivoli Terme. #1 pasticceria locale. Google 4.7★" />
+  <title>Gelateria Venice · Tivoli Terme</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary:    #1C1917;
+      --color-secondary:  #44403C;
+      --color-accent:     #A16207;
+      --color-accent-lt:  #CA8A04;
+      --color-gold:       #D4A017;
+      --color-bg:         #FAFAF9;
+      --color-bg-warm:    #FDF8F0;
+      --color-muted:      #E7E5E4;
+      --color-border:     #D6D3D1;
+      --color-text:       #0C0A09;
+      --color-text-muted: #78716C;
+      --color-cream:      #FEF9EE;
+      --color-ivory:      #FFFBF0;
+
+      --font-heading: 'Bodoni Moda', Georgia, serif;
+      --font-body:    'Jost', system-ui, sans-serif;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.15);
+      --shadow-xl:  0 24px 64px rgba(0,0,0,.18);
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 40px;
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-in:  cubic-bezier(0.64, 0, 0.78, 0);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ── Utility ────────────────────────────────────────── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Navigation ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: background 0.4s var(--ease-out), padding 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .nav.scrolled {
+      background: rgba(252, 249, 238, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 0;
+      box-shadow: 0 1px 0 rgba(0,0,0,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      transition: color 0.4s;
+    }
+    .nav.scrolled .nav-logo { color: var(--color-primary); }
+    .nav-logo span { color: var(--color-gold); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.25s;
+    }
+    .nav.scrolled .nav-links a { color: var(--color-secondary); }
+    .nav-links a:hover { color: var(--color-gold); }
+    .nav.scrolled .nav-links a:hover { color: var(--color-accent); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: #fff;
+      transition: all 0.25s;
+    }
+    .nav.scrolled .nav-cta {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    .nav.scrolled .nav-cta:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .nav.scrolled .nav-toggle span { background: var(--color-primary); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--color-primary);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--color-gold); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 767px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--color-primary);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1567206563114-c179706060bb?w=1920&q=85&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 40%;
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(12,10,9,0.72) 0%,
+        rgba(28,25,23,0.55) 50%,
+        rgba(12,10,9,0.82) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 120px 24px 80px;
+      max-width: 900px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(212,160,23,0.5);
+      background: rgba(212,160,23,0.12);
+      backdrop-filter: blur(8px);
+      color: var(--color-gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeInDown 0.8s var(--ease-out) 0.2s both;
+    }
+    .hero-badge i { font-size: 10px; }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(48px, 9vw, 112px);
+      font-weight: 400;
+      line-height: 1.0;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.9s var(--ease-out) 0.35s both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-gold);
+    }
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 19px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+      animation: fadeInUp 0.9s var(--ease-out) 0.5s both;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s var(--ease-out) 0.65s both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      background: var(--color-gold);
+      color: var(--color-primary);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s var(--ease-out);
+      box-shadow: 0 0 0 0 rgba(212,160,23,0.4);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212,160,23,0.35);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.25s var(--ease-out);
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.05);
+    }
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 48px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 0 24px;
+      animation: fadeInUp 0.9s var(--ease-out) 0.8s both;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      animation: fadeIn 1s var(--ease-out) 1.2s both;
+    }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+
+    @media (max-width: 767px) {
+      .hero-stats { gap: 24px; }
+      .hero-stat-value { font-size: 28px; }
+      .hero-scroll { display: none; }
+    }
+
+    /* ── Marquee Strip ──────────────────────────────────── */
+    .marquee-strip {
+      background: var(--color-primary);
+      padding: 16px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      gap: 0;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 32px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .marquee-item i {
+      color: var(--color-gold);
+      font-size: 10px;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Story Section ──────────────────────────────────── */
+    .story {
+      padding: 120px 0;
+      background: var(--color-bg-warm);
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .story-images {
+      position: relative;
+    }
+    .story-img-main {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+    }
+    .story-img-accent {
+      position: absolute;
+      width: 200px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 4px solid var(--color-bg-warm);
+      box-shadow: var(--shadow-lg);
+      bottom: -32px;
+      right: -32px;
+    }
+    .story-award {
+      position: absolute;
+      top: 32px;
+      left: -32px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .story-award-value {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+    .story-award-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+    .story-text { padding-right: 24px; }
+    .story-text h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--color-primary);
+      margin: 16px 0 28px;
+    }
+    .story-text p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+    }
+    .story-signature {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-style: italic;
+      color: var(--color-accent);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 1023px) {
+      .story-grid { grid-template-columns: 1fr; gap: 60px; }
+      .story-images { max-width: 560px; margin: 0 auto; }
+      .story-text { padding-right: 0; }
+      .story-award { left: -16px; top: 16px; }
+    }
+    @media (max-width: 767px) {
+      .story { padding: 80px 0; }
+      .story-img-main { height: 380px; }
+      .story-img-accent { display: none; }
+    }
+
+    /* ── Flavors Section ────────────────────────────────── */
+    .flavors {
+      padding: 120px 0;
+      background: var(--color-ivory);
+    }
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--color-primary);
+      margin: 16px 0 20px;
+    }
+    .section-header p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+    }
+
+    .flavors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .flavor-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+      cursor: pointer;
+    }
+    .flavor-card:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-6px);
+    }
+    .flavor-card-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .flavor-card:hover .flavor-card-img { transform: scale(1.06); }
+    .flavor-card-body {
+      padding: 24px;
+    }
+    .flavor-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--color-cream);
+      color: var(--color-accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .flavor-name {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: 10px;
+    }
+    .flavor-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--color-text-muted);
+    }
+    .flavor-card-featured {
+      grid-column: span 1;
+    }
+    .flavor-card-wide {
+      grid-column: span 2;
+    }
+    .flavor-card-wide .flavor-card-img { height: 320px; }
+
+    @media (max-width: 1023px) {
+      .flavors-grid { grid-template-columns: repeat(2, 1fr); }
+      .flavor-card-wide { grid-column: span 2; }
+    }
+    @media (max-width: 599px) {
+      .flavors { padding: 80px 0; }
+      .flavors-grid { grid-template-columns: 1fr; }
+      .flavor-card-wide { grid-column: span 1; }
+      .flavor-card-wide .flavor-card-img { height: 240px; }
+    }
+
+    /* ── Awards Section ─────────────────────────────────── */
+    .awards {
+      padding: 120px 0;
+      background: var(--color-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    .awards::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .awards .section-label { color: var(--color-gold); }
+    .awards .section-header h2 { color: #fff; }
+    .awards .section-header p { color: rgba(255,255,255,0.6); }
+
+    .ratings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .rating-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: background 0.25s, border-color 0.25s, transform 0.35s var(--ease-out);
+    }
+    .rating-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(212,160,23,0.4);
+      transform: translateY(-4px);
+    }
+    .rating-platform {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+    .rating-score {
+      font-family: var(--font-heading);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .rating-stars { color: var(--color-gold); font-size: 14px; margin-bottom: 10px; }
+    .rating-count {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 1023px) {
+      .ratings-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 599px) {
+      .awards { padding: 80px 0; }
+      .ratings-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .rating-score { font-size: 40px; }
+    }
+
+    /* ── Testimonials ───────────────────────────────────── */
+    .testimonials-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      transition: transform 0.35s var(--ease-out), border-color 0.25s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,160,23,0.35);
+    }
+    .testimonial-stars { color: var(--color-gold); font-size: 13px; margin-bottom: 16px; }
+    .testimonial-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(212,160,23,0.4);
+    }
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .testimonial-date {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 1023px) {
+      .testimonials-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 599px) {
+      .testimonials-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Experience Section (replaces 3D section) ────────── */
+    .experience {
+      padding: 140px 0;
+      background: var(--color-bg-warm);
+      position: relative;
+      overflow: hidden;
+    }
+    .experience-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading);
+      font-size: clamp(100px, 18vw, 260px);
+      font-weight: 700;
+      color: rgba(161,98,7,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+    .experience-visual {
+      position: relative;
+      min-height: 600px;
+    }
+    .experience-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .experience-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(12,10,9,0.3) 0%, transparent 60%);
+    }
+    .experience-float-card {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      background: rgba(252,249,238,0.92);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    .experience-float-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+    .experience-float-sub {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+    .experience-content {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .experience-content .section-label { color: var(--color-gold); margin-bottom: 16px; }
+    .experience-content h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 500;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .experience-content p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 48px;
+    }
+    .experience-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .pillar-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(212,160,23,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+      font-size: 18px;
+    }
+    .pillar-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .pillar-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+    }
+
+    @media (max-width: 1023px) {
+      .experience-grid { grid-template-columns: 1fr; border-radius: var(--radius-lg); }
+      .experience-visual { min-height: 420px; }
+      .experience-content { padding: 56px 40px; }
+    }
+    @media (max-width: 599px) {
+      .experience { padding: 80px 0; }
+      .experience-visual { min-height: 300px; }
+      .experience-content { padding: 40px 24px; }
+      .experience-float-card { left: 16px; bottom: 16px; }
+    }
+
+    /* ── Gallery Section ────────────────────────────────── */
+    .gallery {
+      padding: 120px 0;
+      background: var(--color-bg);
+    }
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 16px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(12,10,9,0);
+      transition: background 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item:hover .gallery-item-overlay { background: rgba(12,10,9,0.3); }
+    .gallery-item-overlay i {
+      color: #fff;
+      font-size: 24px;
+      opacity: 0;
+      transition: opacity 0.35s;
+      transform: scale(0.8);
+      transition: all 0.35s;
+    }
+    .gallery-item:hover .gallery-item-overlay i { opacity: 1; transform: scale(1); }
+
+    .gallery-item:nth-child(1) { grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-row: span 2; }
+    .gallery-item:nth-child(6) { grid-column: span 2; }
+
+    @media (max-width: 1023px) {
+      .gallery-masonry { grid-template-columns: repeat(3, 1fr); }
+      .gallery-item:nth-child(6) { grid-column: span 1; }
+    }
+    @media (max-width: 599px) {
+      .gallery { padding: 80px 0; }
+      .gallery-masonry { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-row: span 1; }
+    }
+
+    /* ── Visit Section ──────────────────────────────────── */
+    .visit {
+      padding: 120px 0;
+      background: var(--color-ivory);
+    }
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .visit-info h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--color-primary);
+      margin: 16px 0 32px;
+    }
+    .visit-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .visit-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .visit-detail-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+      font-size: 16px;
+    }
+    .visit-detail-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+    .visit-detail-value {
+      font-size: 16px;
+      color: var(--color-primary);
+      line-height: 1.6;
+    }
+    .visit-map {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--color-muted);
+    }
+    .visit-map iframe {
+      width: 100%;
+      height: 480px;
+      display: block;
+      border: none;
+    }
+    .visit-cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 100px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .btn-dark:hover {
+      background: var(--color-secondary);
+      transform: translateY(-2px);
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 100px;
+      background: var(--color-gold);
+      color: var(--color-primary);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .btn-gold:hover {
+      background: var(--color-accent-lt);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1023px) {
+      .visit-grid { grid-template-columns: 1fr; gap: 60px; }
+    }
+    @media (max-width: 767px) {
+      .visit { padding: 80px 0; }
+      .visit-map iframe { height: 320px; }
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .footer {
+      background: var(--color-primary);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+    }
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer-logo span { color: var(--color-gold); }
+    .footer-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      max-width: 300px;
+      margin-bottom: 32px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+      transition: all 0.25s;
+    }
+    .footer-social a:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      background: rgba(212,160,23,0.1);
+    }
+    .footer-col-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-links a {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--color-gold); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-badge i { color: var(--color-gold); }
+
+    @media (max-width: 1023px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .footer-grid > *:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 599px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid > *:first-child { grid-column: span 1; }
+    }
+
+    /* ── Keyframes ──────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Lightbox ───────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── Cookie Banner ──────────────────────────────────── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      max-width: 480px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-xl);
+      z-index: 500;
+      transition: transform 0.5s var(--ease-out), opacity 0.5s;
+    }
+    .cookie-banner.hidden {
+      transform: translateY(120%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .cookie-text { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.75); margin-bottom: 16px; }
+    .cookie-actions { display: flex; gap: 12px; }
+    .cookie-accept {
+      padding: 10px 24px;
+      border-radius: 100px;
+      background: var(--color-gold);
+      color: var(--color-primary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .cookie-decline {
+      padding: 10px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      cursor: pointer;
+      background: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" id="nav" aria-label="Navigation principale">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" aria-label="Gelateria Venice home">
+          Venice <span>·</span> Gelateria
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="#storia">La Nostra Storia</a></li>
+          <li><a href="#gusti">Gusti</a></li>
+          <li><a href="#riconoscimenti">Riconoscimenti</a></li>
+          <li><a href="#gallery">Galleria</a></li>
+        </ul>
+        <a href="#visita" class="nav-cta">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          Vienici a trovare
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile" id="navMobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+    <button class="nav-mobile-close" id="navMobileClose" aria-label="Chiudi menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="#storia" class="nav-mobile-link">Storia</a>
+    <a href="#gusti" class="nav-mobile-link">Gusti</a>
+    <a href="#riconoscimenti" class="nav-mobile-link">Riconoscimenti</a>
+    <a href="#gallery" class="nav-mobile-link">Galleria</a>
+    <a href="#visita" class="nav-mobile-link">Vienici</a>
+  </div>
+
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-bg" id="heroBg" role="img" aria-label="Gelato artigianale veneziano"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        #1 Pasticceria · Tivoli Terme
+      </div>
+      <h1 class="hero-title">
+        L'Arte del<br><em>Gelato</em>
+      </h1>
+      <p class="hero-subtitle">
+        Ogni gusto racconta una storia. Materie prime selezionate,
+        ricette artigianali tramandate con passione — benvenuti a Gelateria Venice.
+      </p>
+      <div class="hero-actions">
+        <a href="#gusti" class="btn-primary">
+          <i class="fa-solid fa-ice-cream" aria-hidden="true"></i>
+          Scopri i gusti
+        </a>
+        <a href="#storia" class="btn-outline">
+          La nostra storia
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats" aria-label="Statistiche">
+      <div class="hero-stat">
+        <div class="hero-stat-value" aria-label="4.7 su 5 su Google">4.7</div>
+        <div class="hero-stat-label">Google ★</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" aria-label="4.9 su 5 su Facebook">4.9</div>
+        <div class="hero-stat-label">Facebook ★</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" aria-label="414 recensioni">#1</div>
+        <div class="hero-stat-label">Tivoli Terme</div>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">Scorri</div>
+  </section>
+
+  <!-- ── Marquee ──────────────────────────────────────────── -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Repeated twice for seamless loop -->
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Gelato Artigianale</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Pistacchio Premium</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Cheesecake Fresca</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Frappè Artigianali</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Yogurt Naturale</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Tivoli Terme · Dal 2010</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Gusti Kinder</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Panna Fresca</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Gelato Artigianale</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Pistacchio Premium</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Cheesecake Fresca</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Frappè Artigianali</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Yogurt Naturale</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Tivoli Terme · Dal 2010</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Gusti Kinder</span>
+      <span class="marquee-item"><i class="fa-solid fa-circle-dot"></i> Panna Fresca</span>
+    </div>
+  </div>
+
+  <!-- ── Story ────────────────────────────────────────────── -->
+  <section class="story" id="storia" aria-labelledby="storyHeading">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-images">
+          <img
+            class="story-img-main"
+            src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=800&q=85&auto=format&fit=crop"
+            alt="Gelato artigianale preparato con cura"
+            width="800" height="520"
+            loading="lazy"
+          />
+          <img
+            class="story-img-accent"
+            src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&q=85&auto=format&fit=crop"
+            alt="Cono gelato con pistacchio"
+            width="400" height="260"
+            loading="lazy"
+          />
+          <div class="story-award" aria-label="414 recensioni, 4.7 stelle su Google">
+            <div class="story-award-value">4.7</div>
+            <div class="story-award-label">414 Recensioni</div>
+          </div>
+        </div>
+        <div class="story-text reveal">
+          <span class="section-label">La Nostra Storia</span>
+          <h2 id="storyHeading">Tradizione<br><em style="font-style:italic; color:var(--color-accent)">veneziana</em><br>nel cuore di Tivoli</h2>
+          <p>
+            Gelateria Venice nasce dalla passione per la vera gelateria artigianale italiana.
+            Ogni giorno selezioniamo le migliori materie prime — pistacchi di Bronte,
+            nocciole piemontesi, frutti di stagione — per creare gusti autentici
+            che si distinguono al primo assaggio.
+          </p>
+          <p>
+            Dall'iconico pistacchio alla sorprendente cheesecake, dai classici Kinder
+            ai fruttoli freschi: il nostro menu è un viaggio tra i sapori italiani
+            più amati, reinterpretati con fantasia e qualità senza compromessi.
+          </p>
+          <div class="story-signature">Gelateria Venice</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Flavors ──────────────────────────────────────────── -->
+  <section class="flavors" id="gusti" aria-labelledby="gustiHeading">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">I Nostri Gusti</span>
+        <h2 id="gustiHeading">Una sinfonia<br>di sapori</h2>
+        <p>Ogni gusto è una scoperta. Materie prime di eccellenza, ricette artigianali
+          e la passione di chi ama il vero gelato italiano.</p>
+      </div>
+      <div class="flavors-grid">
+
+        <article class="flavor-card flavor-card-wide reveal reveal-delay-1">
+          <img
+            class="flavor-card-img"
+            src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&q=85&auto=format&fit=crop"
+            alt="Pistacchio di Bronte premium"
+            width="900" height="320"
+            loading="lazy"
+          />
+          <div class="flavor-card-body">
+            <span class="flavor-tag">Il Classico</span>
+            <h3 class="flavor-name">Pistacchio di Bronte</h3>
+            <p class="flavor-desc">
+              Il re dei gusti. Pistacchi siciliani DOP lavorati a freddo per
+              un sapore intenso e autentico che si riconosce al primo assaggio.
+            </p>
+          </div>
+        </article>
+
+        <article class="flavor-card flavor-card-featured reveal reveal-delay-2">
+          <img
+            class="flavor-card-img"
+            src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=85&auto=format&fit=crop"
+            alt="Cheesecake gelato"
+            width="600" height="240"
+            loading="lazy"
+          />
+          <div class="flavor-card-body">
+            <span class="flavor-tag">Signature</span>
+            <h3 class="flavor-name">Cheesecake</h3>
+            <p class="flavor-desc">Cremoso, fresco, irresistibile. Una cheesecake trasformata in gelato.</p>
+          </div>
+        </article>
+
+        <article class="flavor-card flavor-card-featured reveal reveal-delay-1">
+          <img
+            class="flavor-card-img"
+            src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?w=600&q=85&auto=format&fit=crop"
+            alt="Frappè artigianale"
+            width="600" height="240"
+            loading="lazy"
+          />
+          <div class="flavor-card-body">
+            <span class="flavor-tag">Stagionale</span>
+            <h3 class="flavor-name">Frappè Artigianali</h3>
+            <p class="flavor-desc">Freschi, cremosi, personalizzabili. Perfetti per ogni stagione.</p>
+          </div>
+        </article>
+
+        <article class="flavor-card flavor-card-featured reveal reveal-delay-2">
+          <img
+            class="flavor-card-img"
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=85&auto=format&fit=crop&sat=-20"
+            alt="Gusti ispirazione Kinder"
+            width="600" height="240"
+            loading="lazy"
+          />
+          <div class="flavor-card-body">
+            <span class="flavor-tag">Fan Favourite</span>
+            <h3 class="flavor-name">Gusti Kinder</h3>
+            <p class="flavor-desc">Varianti ispirate ai dolci Kinder più amati. Per adulti e bambini.</p>
+          </div>
+        </article>
+
+        <article class="flavor-card flavor-card-featured reveal reveal-delay-3">
+          <img
+            class="flavor-card-img"
+            src="https://images.unsplash.com/photo-1534353341862-9f6a3b98e70c?w=600&q=85&auto=format&fit=crop"
+            alt="Yogurt fresco"
+            width="600" height="240"
+            loading="lazy"
+          />
+          <div class="flavor-card-body">
+            <span class="flavor-tag">Leggero</span>
+            <h3 class="flavor-name">Yogurt &amp; Fruttolo</h3>
+            <p class="flavor-desc">Leggerezza senza rinunciare al gusto. Frutta fresca, yogurt naturale.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Experience (new section replacing 3D) ────────────── -->
+  <section class="experience" id="esperienza" aria-labelledby="expHeading">
+    <div class="experience-bg-text" aria-hidden="true">Venice</div>
+    <div class="container">
+      <div class="experience-grid reveal">
+        <div class="experience-visual">
+          <img
+            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=900&q=85&auto=format&fit=crop"
+            alt="Gelateria Venice interno accogliente"
+            width="900" height="600"
+            loading="lazy"
+          />
+          <div class="experience-visual-overlay"></div>
+          <div class="experience-float-card">
+            <div class="experience-float-title">Gelateria Venice</div>
+            <div class="experience-float-sub">Tivoli Terme · Aperto tutti i giorni</div>
+          </div>
+        </div>
+        <div class="experience-content">
+          <span class="section-label">La Nostra Filosofia</span>
+          <h2 id="expHeading">Tre pilastri<br>di un gelato<br>d'eccellenza</h2>
+          <p>
+            Ogni coppetta che esce dal nostro banco è il risultato di una cura
+            ossessiva per la qualità, la freschezza e l'esperienza del cliente.
+          </p>
+          <div class="experience-pillars">
+            <div class="pillar">
+              <div class="pillar-icon" aria-hidden="true">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <div>
+                <div class="pillar-title">Ingredienti Selezionati</div>
+                <p class="pillar-text">Filiera corta, materie prime DOP e IGP.
+                  Solo il meglio che la terra italiana può offrire.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon" aria-hidden="true">
+                <i class="fa-solid fa-hands"></i>
+              </div>
+              <div>
+                <div class="pillar-title">Lavorazione Artigianale</div>
+                <p class="pillar-text">Nessuna scorciatoia. Ogni gusto è prodotto
+                  fresco ogni giorno con ricette originali.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon" aria-hidden="true">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <div>
+                <div class="pillar-title">Accoglienza Genuina</div>
+                <p class="pillar-text">Un sorriso, un consiglio sincero.
+                  Il nostro team rende ogni visita un momento speciale.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Awards & Ratings ─────────────────────────────────── -->
+  <section class="awards" id="riconoscimenti" aria-labelledby="awardsHeading">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Riconoscimenti</span>
+        <h2 id="awardsHeading">Parlano di noi</h2>
+        <p>Non promettiamo eccellenza — la dimostriamo ogni giorno attraverso
+          le opinioni di chi ci sceglie.</p>
+      </div>
+
+      <div class="ratings-grid reveal">
+        <div class="rating-card">
+          <div class="rating-platform">Google</div>
+          <div class="rating-score" aria-label="4.7 su 5">4.7</div>
+          <div class="rating-stars" aria-hidden="true">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <div class="rating-count">360 recensioni</div>
+        </div>
+        <div class="rating-card">
+          <div class="rating-platform">Facebook</div>
+          <div class="rating-score" aria-label="4.9 su 5">4.9</div>
+          <div class="rating-stars" aria-hidden="true">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="rating-count">48 recensioni</div>
+        </div>
+        <div class="rating-card">
+          <div class="rating-platform">TripAdvisor</div>
+          <div class="rating-score" aria-label="4 su 5">4.0</div>
+          <div class="rating-stars" aria-hidden="true">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+          </div>
+          <div class="rating-count">6 recensioni</div>
+        </div>
+        <div class="rating-card">
+          <div class="rating-platform">Classifica</div>
+          <div class="rating-score" aria-label="numero 1">#1</div>
+          <div class="rating-stars" aria-hidden="true" style="color:var(--color-gold); font-size:12px;">
+            Pasticceria a Tivoli Terme
+          </div>
+          <div class="rating-count">su 5 locali</div>
+        </div>
+      </div>
+
+      <div class="testimonials-row reveal">
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 stelle">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">
+            "Ottimo gelato artigianale. Gusti intensi, prezzi contenuti, personale gentile.
+            La migliore gelateria della zona senza alcun dubbio."
+          </p>
+          <div class="testimonial-author">
+            <img
+              class="testimonial-avatar"
+              src="https://i.pravatar.cc/80?img=47"
+              alt="Annalisa Porcu"
+              width="40" height="40"
+              loading="lazy"
+            />
+            <div>
+              <div class="testimonial-name">Annalisa Porcu</div>
+              <div class="testimonial-date">8 mesi fa · Google</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 stelle">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">
+            "Gelato ottimo e veramente gentili. Complimenti!
+            Torno ogni volta che passo da Tivoli Terme — è diventato un rituale."
+          </p>
+          <div class="testimonial-author">
+            <img
+              class="testimonial-avatar"
+              src="https://i.pravatar.cc/80?img=12"
+              alt="Riccardo Martini"
+              width="40" height="40"
+              loading="lazy"
+            />
+            <div>
+              <div class="testimonial-name">Riccardo Martini</div>
+              <div class="testimonial-date">8 mesi fa · Google</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 stelle">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">
+            "Un vero gioiello per gli amanti del gelato artigianale. Dal classico pistacchio
+            alla sorprendente cheesecake — ogni gusto è una scoperta."
+          </p>
+          <div class="testimonial-author">
+            <img
+              class="testimonial-avatar"
+              src="https://i.pravatar.cc/80?img=33"
+              alt="Pierluigi Roccia"
+              width="40" height="40"
+              loading="lazy"
+            />
+            <div>
+              <div class="testimonial-name">Pierluigi Roccia</div>
+              <div class="testimonial-date">10 mesi fa · Google</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Gallery ──────────────────────────────────────────── -->
+  <section class="gallery" id="gallery" aria-labelledby="galleryHeading">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Galleria</span>
+        <h2 id="galleryHeading">I momenti<br>più dolci</h2>
+        <p>Ogni foto racconta un gusto, un sorriso, un momento di pura felicità gelato.</p>
+      </div>
+      <div class="gallery-masonry reveal">
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1567206563114-c179706060bb?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1567206563114-c179706060bb?w=600&q=80&auto=format&fit=crop" alt="Selezione di gelati colorati" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80&auto=format&fit=crop" alt="Cono gelato pistacchio" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=600&q=80&auto=format&fit=crop" alt="Preparazione gelato artigianale" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=600&q=80&auto=format&fit=crop" alt="Gelato cono estate" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80&auto=format&fit=crop" alt="Dessert artigianali" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80&auto=format&fit=crop" alt="Frappè estivo" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="gallery-item" data-src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?w=1200&q=90&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?w=600&q=80&auto=format&fit=crop" alt="Gelato fondente" width="600" height="400" loading="lazy" />
+          <div class="gallery-item-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Visit ────────────────────────────────────────────── -->
+  <section class="visit" id="visita" aria-labelledby="visitaHeading">
+    <div class="container">
+      <div class="visit-grid">
+        <div class="visit-info reveal">
+          <span class="section-label">Dove Siamo</span>
+          <h2 id="visitaHeading">Vienici a trovare<br>a Tivoli Terme</h2>
+          <div class="visit-details">
+            <div class="visit-detail">
+              <div class="visit-detail-icon" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <div class="visit-detail-title">Indirizzo</div>
+                <div class="visit-detail-value">Via Roma, Tivoli Terme (RM)<br>00011, Italia</div>
+              </div>
+            </div>
+            <div class="visit-detail">
+              <div class="visit-detail-icon" aria-hidden="true">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div>
+                <div class="visit-detail-title">Orari</div>
+                <div class="visit-detail-value">
+                  Lunedì – Domenica<br>
+                  10:00 – 22:00
+                </div>
+              </div>
+            </div>
+            <div class="visit-detail">
+              <div class="visit-detail-icon" aria-hidden="true">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <div class="visit-detail-title">Contatto</div>
+                <div class="visit-detail-value">
+                  <a href="tel:+39XXXXXXXXXX" style="color:var(--color-accent);">
+                    +39 XXX XXX XXXX
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="visit-detail">
+              <div class="visit-detail-icon" aria-hidden="true">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <div>
+                <div class="visit-detail-title">Social</div>
+                <div class="visit-detail-value">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">@gelateriaVenice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="visit-cta">
+            <a
+              href="https://www.google.com/maps/search/Gelateria+Venice+Tivoli+Terme"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-dark"
+            >
+              <i class="fa-solid fa-map" aria-hidden="true"></i>
+              Apri in Maps
+            </a>
+            <a
+              href="https://www.google.com/search?q=Gelateria+Venice+Tivoli+Terme+recensioni"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-gold"
+            >
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              Lascia una recensione
+            </a>
+          </div>
+        </div>
+        <div class="visit-map reveal reveal-delay-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5969.27!2d12.78!3d41.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f63!2sGelateria%20Venice%20Tivoli%20Terme!5e0!3m2!1sit!2sit!4v1"
+            title="Mappa Gelateria Venice, Tivoli Terme"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="footer" aria-label="Footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Venice <span>·</span> Gelateria</div>
+          <p class="footer-desc">
+            Gelato artigianale d'eccellenza nel cuore di Tivoli Terme.
+            Ogni giorno, con passione e ingredienti selezionati.
+          </p>
+          <div class="footer-social">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://g.page/r/" target="_blank" rel="noopener noreferrer" aria-label="Google">
+              <i class="fa-brands fa-google"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigazione</div>
+          <ul class="footer-links" role="list">
+            <li><a href="#storia">La Nostra Storia</a></li>
+            <li><a href="#gusti">I Nostri Gusti</a></li>
+            <li><a href="#riconoscimenti">Riconoscimenti</a></li>
+            <li><a href="#gallery">Galleria</a></li>
+            <li><a href="#visita">Dove Siamo</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contatti</div>
+          <ul class="footer-links" role="list">
+            <li><a href="tel:+39XXXXXXXXXX">Telefono</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li>
+              <a href="https://www.google.com/maps/search/Gelateria+Venice+Tivoli+Terme" target="_blank" rel="noopener noreferrer">
+                Tivoli Terme (RM)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Gelateria Venice · Tutti i diritti riservati
+        </div>
+        <div class="footer-badge">
+          <i class="fa-solid fa-star" aria-hidden="true"></i>
+          #1 Pasticceria · Tivoli Terme
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Lightbox ─────────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Chiudi">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img src="" alt="" id="lightboxImg" />
+  </div>
+
+  <!-- ── Cookie Banner ─────────────────────────────────────── -->
+  <div class="cookie-banner" id="cookieBanner" role="alertdialog" aria-live="polite" aria-label="Cookie">
+    <p class="cookie-text">
+      Utilizziamo cookie per migliorare la tua esperienza. Continuando, accetti la nostra
+      <a href="#" style="color:var(--color-gold);">cookie policy</a>.
+    </p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookieAccept">Accetta</button>
+      <button class="cookie-decline" id="cookieDecline">Rifiuta</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── Navigation scroll behaviour ───────────────── */
+    const nav = document.getElementById('nav');
+    const heroBg = document.getElementById('heroBg');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Hero BG entrance
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+    /* ── Mobile menu ────────────────────────────────── */
+    const navToggle = document.getElementById('navToggle');
+    const navMobile = document.getElementById('navMobile');
+    const navMobileClose = document.getElementById('navMobileClose');
+
+    navToggle.addEventListener('click', () => {
+      navMobile.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeMobileNav = () => {
+      navMobile.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    navMobileClose.addEventListener('click', closeMobileNav);
+    navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+
+    /* ── Intersection Observer for reveals ──────────── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Lightbox ────────────────────────────────────── */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src');
+        const alt = item.querySelector('img').alt;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ── Cookie Banner ───────────────────────────────── */
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieDecline = document.getElementById('cookieDecline');
+
+    if (!localStorage.getItem('cookie-consent')) {
+      setTimeout(() => cookieBanner.classList.remove('hidden'), 2000);
+    } else {
+      cookieBanner.classList.add('hidden');
+    }
+
+    const dismissCookie = () => {
+      cookieBanner.classList.add('hidden');
+      localStorage.setItem('cookie-consent', 'true');
+    };
+    cookieAccept.addEventListener('click', dismissCookie);
+    cookieDecline.addEventListener('click', dismissCookie);
+
+    /* ── Animated counters in hero ───────────────────── */
+    const animateValue = (el, from, to, decimals, duration) => {
+      const start = performance.now();
+      const update = (time) => {
+        const progress = Math.min((time - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (from + (to - from) * ease).toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    };
+  </script>
+</body>
+</html>
